@@ -7,6 +7,7 @@ import ru.oksei.talisman.simpleMoney.Models.Person;
 import ru.oksei.talisman.simpleMoney.Services.JwtService;
 import ru.oksei.talisman.simpleMoney.Services.PersonService;
 
+import java.util.List;
 import java.util.Objects;
 
 @RestController
@@ -32,9 +33,13 @@ public class PersonController {
     }
 
     @PostMapping("/reg")
-    public ResponseEntity<?> register(@ModelAttribute Person person) {
+    public ResponseEntity<?> register(@RequestParam("name") String name, @RequestParam("email") String email,
+                                      @RequestParam("password") String password) {
+        Person person = new Person(name, email, password);
+        System.out.println(person.getEmail());
+        System.out.println(person.getPassword());
         String res = personService.registration(person);
-        if (Objects.equals(res, "error")){
+        if (res.equals("error")){
             return ResponseEntity.status(401).body("Пользователь с таким email уже зарегистрирован");
         }
         return ResponseEntity.ok().body("Пользователь зарегистрирован");

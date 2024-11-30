@@ -2,6 +2,8 @@ package ru.oksei.talisman.simpleMoney.Models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "person")
 public class Person {
@@ -15,6 +17,10 @@ public class Person {
     private String email;
     @Column(name = "password")
     private String password;
+    // Все категории пользователя
+    @OneToMany (mappedBy = "person")
+    private List<Category> categories;
+
     public Person() {}
 
     public Person(String name, String email, String password) {
