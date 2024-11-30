@@ -20,6 +20,12 @@ public class Person {
     // Все категории пользователя
     @OneToMany (mappedBy = "person")
     private List<Category> categories;
+    // Планы доходов
+    @OneToMany(mappedBy = "person")
+    private List<IncomePlan> incomePlans;
+    // Планы расходов
+    @OneToMany(mappedBy = "person")
+    private List<CostPlan> costPlans;
 
     public Person() {}
 

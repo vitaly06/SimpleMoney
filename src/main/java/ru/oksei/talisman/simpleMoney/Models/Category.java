@@ -2,6 +2,8 @@ package ru.oksei.talisman.simpleMoney.Models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "categories")
 public class Category {
@@ -17,9 +19,20 @@ public class Category {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "personid")
     private Person person;
+    // Планы доходов
+    @OneToMany(mappedBy = "category")
+    private List<IncomePlan> incomePlans;
+    // Планы расходов
+    @OneToMany(mappedBy = "category")
+    private List<CostPlan> costPlans;
 
     public Category(){
 
+    }
+
+    public Category(String categoryType, String categoryName) {
+        this.categoryType = categoryType;
+        this.categoryName = categoryName;
     }
 
     public int getCategoryId() {
