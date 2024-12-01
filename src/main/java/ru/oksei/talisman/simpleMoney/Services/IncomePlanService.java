@@ -21,10 +21,10 @@ public class IncomePlanService {
     @Transactional
     public void saveIncomePlan(IncomePlan incomePlan) {
         // Устанавливаем недобор и резерв
-        if(incomePlan.getFact() - incomePlan.getPlan() >= 0){
+        if (incomePlan.getFact() - incomePlan.getPlan() >= 0) {
             incomePlan.setShortage(0);
             incomePlan.setReserve(incomePlan.getFact() - incomePlan.getPlan());
-        } else{
+        } else {
             incomePlan.setReserve(0);
             incomePlan.setShortage((incomePlan.getFact() - incomePlan.getPlan()) * (-1));
         }

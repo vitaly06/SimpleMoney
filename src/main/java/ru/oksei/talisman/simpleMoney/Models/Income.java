@@ -17,16 +17,14 @@ public class Income {
     @Column(name = "year")
     private int year;
     @Column(name = "date")
-    private Date date;
+    private String date;
     @Column(name = "summa")
     private int summa;
     @ManyToOne
     @JoinColumn(name = "categoryid")
-    @JsonIgnore
     private Category category;
     @ManyToOne
     @JoinColumn(name = "accountid")
-    @JsonIgnore
     private Account account;
     @ManyToOne
     @JoinColumn(name = "personid")
@@ -36,7 +34,7 @@ public class Income {
 
     public Income() {}
 
-    public Income(String month, int year, Date date, int summa) {
+    public Income(String month, int year, String date, int summa) {
         this.month = month;
         this.year = year;
         this.date = date;
@@ -69,11 +67,11 @@ public class Income {
         this.year = year;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

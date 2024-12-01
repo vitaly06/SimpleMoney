@@ -3,10 +3,8 @@ package ru.oksei.talisman.simpleMoney.Controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.oksei.talisman.simpleMoney.Models.*;
-import ru.oksei.talisman.simpleMoney.Services.AccountService;
-import ru.oksei.talisman.simpleMoney.Services.CategoryService;
 import ru.oksei.talisman.simpleMoney.Services.IncomeService;
-import ru.oksei.talisman.simpleMoney.Services.PersonService;
+
 
 import java.util.List;
 
@@ -30,7 +28,6 @@ public class IncomeController {
                               @RequestParam("personId") int personId,
                               @RequestParam("categoryId") int categoryId,
                               @RequestParam("accountId") int accountId) {
-
         incomeService.saveIncome(income, personId, categoryId, accountId);
     }
 }

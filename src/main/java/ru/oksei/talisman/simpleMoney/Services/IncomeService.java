@@ -48,24 +48,27 @@ public class IncomeService {
         // пополняем счёт
         account.setSumma(account.getSumma() + income.getSumma());
         // Обновляем план
-        IncomePlan incomePlan = incomePlanService.getIncomePlansForUser(income.getMonth(), income.getYear(),
-                personId).get(0);
-        incomePlan.setFact(incomePlan.getFact() + income.getSumma());
-        // Устанавливаем недобор и резерв
-        if(incomePlan.getFact() - incomePlan.getPlan() >= 0){
-            incomePlan.setShortage(0);
-            incomePlan.setReserve(incomePlan.getFact() - incomePlan.getPlan());
-        } else{
-            incomePlan.setReserve(0);
-            incomePlan.setShortage((incomePlan.getFact() - incomePlan.getPlan()) * (-1));
+        try {
+            IncomePlan incomePlan = incomePlanService.getIncomePlansForUser(income.getMonth(), income.getYear(),
+                    personId).get(0);
+            incomePlan.setFact(incomePlan.getFact() + income.getSumma());
+            // Устанавливаем недобор и резерв
+            if (incomePlan.getFact() - incomePlan.getPlan() >= 0) {
+                incomePlan.setShortage(0);
+                incomePlan.setReserve(incomePlan.getFact() - incomePlan.getPlan());
+            } else {
+                incomePlan.setReserve(0);
+                incomePlan.setShortage((incomePlan.getFact() - incomePlan.getPlan()) * (-1));
+            }
+            incomePlanRepository.save(incomePlan);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        incomePlanRepository.save(incomePlan);
         income.setPerson(person);
         income.setCategory(category);
         income.setAccount(account);
         incomeRepository.save(income);
         accountRepository.save(account);
         categoryRepository.save(category);
-        incomePlanRepository.save(incomePlan);
     }
 }
