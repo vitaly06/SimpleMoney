@@ -1,5 +1,6 @@
 package ru.oksei.talisman.simpleMoney.Services;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -7,6 +8,7 @@ import ru.oksei.talisman.simpleMoney.Models.Category;
 import ru.oksei.talisman.simpleMoney.Repositories.CategoryRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -34,16 +36,17 @@ public class CategoryService {
     }
 
     @Transactional
-    public void updateCategory(int id, Category category){
-        category.setCategoryId(id);
-        categoryRepository.save(category);
-
+    public void updateCategory(int categoryId, Category category){
+        Category existingCategory = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new EntityNotFoundException("Category not found with id: " + categoryId));
+        if (existingCategory != null) {
+            existingCategory.setCategoryName(category.getCategoryName());
+            categoryRepository.save(existingCategory);
+        }
     }
 
     @Transactional
     public void deleteCategory(int id){
         categoryRepository.deleteById(id);
     }
-
-
 }

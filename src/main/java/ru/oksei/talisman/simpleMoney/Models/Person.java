@@ -1,5 +1,6 @@
 package ru.oksei.talisman.simpleMoney.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -19,15 +20,19 @@ public class Person {
     private String password;
     // Все категории пользователя
     @OneToMany (mappedBy = "person")
+    @JsonIgnore
     private List<Category> categories;
     // Планы доходов
     @OneToMany(mappedBy = "person")
+    @JsonIgnore
     private List<IncomePlan> incomePlans;
     // Планы расходов
     @OneToMany(mappedBy = "person")
+    @JsonIgnore
     private List<CostPlan> costPlans;
     // Счета
     @OneToMany(mappedBy = "person")
+    @JsonIgnore
     private List<Account> accounts;
 
     public Person() {}

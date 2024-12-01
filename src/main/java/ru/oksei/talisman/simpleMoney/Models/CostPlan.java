@@ -29,7 +29,6 @@ public class CostPlan {
     private Person person;
     // Категория траты
     @ManyToOne(cascade = CascadeType.ALL)
-    @JsonIgnore
     @JoinColumn(name = "categoryid")
     private Category category;
 

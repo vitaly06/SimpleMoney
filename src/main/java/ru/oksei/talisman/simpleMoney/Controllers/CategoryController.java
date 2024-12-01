@@ -51,6 +51,7 @@ public class CategoryController {
     @PostMapping("/updateCategory")
     public void updateCategory(@ModelAttribute Category category,
                                @RequestParam("categoryId") int categoryId){
+
         categoryService.updateCategory(categoryId, category);
     }
 

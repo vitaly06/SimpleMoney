@@ -27,9 +27,17 @@ public class AccountService {
     }
 
     @Transactional
-    public void updateAccount(Account account, int accountId) {
-        account.setAccountId(accountId);
-        accountRepository.save(account);
+    public void updateAccount(Account updatedAccount, int accountId) {
+        // Загрузка существующего аккаунта
+        Account existingAccount = accountRepository.findById(accountId)
+                .orElseThrow(() -> new IllegalArgumentException("Аккаунт с ID " + accountId + " не найден"));
+
+            existingAccount.setAccountName(updatedAccount.getAccountName());
+            existingAccount.setCurrency(updatedAccount.getCurrency());
+            existingAccount.setSumma(updatedAccount.getSumma());
+
+        // Сохраняем обновленный аккаунт
+        accountRepository.save(existingAccount);
     }
 
     @Transactional

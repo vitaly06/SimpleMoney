@@ -17,17 +17,17 @@ public class Category {
     @Column(name = "categoryname")
     private String categoryName;
     // Пользователь
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "personid")
     @JsonIgnore
     private Person person;
     // Планы доходов
     @JsonIgnore
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<IncomePlan> incomePlans;
     // Планы расходов
     @JsonIgnore
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<CostPlan> costPlans;
 
     public Category(){

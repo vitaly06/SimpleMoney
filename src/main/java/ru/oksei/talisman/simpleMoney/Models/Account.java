@@ -16,7 +16,7 @@ public class Account {
     private String currency;
     @Column(name = "summa")
     private int summa;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "personid")
     @JsonIgnore
     private Person person;

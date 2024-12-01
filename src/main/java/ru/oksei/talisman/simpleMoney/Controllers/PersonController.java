@@ -3,6 +3,7 @@ package ru.oksei.talisman.simpleMoney.Controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.oksei.talisman.simpleMoney.Models.LoginResponse;
 import ru.oksei.talisman.simpleMoney.Models.Person;
 import ru.oksei.talisman.simpleMoney.Services.JwtService;
 import ru.oksei.talisman.simpleMoney.Services.PersonService;
@@ -27,7 +28,8 @@ public class PersonController {
         Person person = personService.login(email, password);
         if (person != null && person.getPassword().equals(password)) {
             String token = jwtService.generateToken(person.getEmail());
-            return ResponseEntity.ok().body(token);
+            LoginResponse loginResponse = new LoginResponse(person, token);
+            return ResponseEntity.ok().body(loginResponse);
         }
         return ResponseEntity.status(401).body("Неверный email или пароль");
     }
