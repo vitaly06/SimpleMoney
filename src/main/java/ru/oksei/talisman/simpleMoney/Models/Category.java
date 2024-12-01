@@ -29,6 +29,14 @@ public class Category {
     @JsonIgnore
     @OneToMany(mappedBy = "category", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<CostPlan> costPlans;
+    // Доходы
+    @OneToMany(mappedBy = "category")
+    @JsonIgnore
+    private List<Income> incomes;
+
+    @OneToMany(mappedBy = "category")
+    @JsonIgnore
+    private List<Expense> expenses;
 
     public Category(){
 
@@ -69,5 +77,37 @@ public class Category {
 
     public void setPerson(Person person) {
         this.person = person;
+    }
+
+    public List<Income> getIncomes() {
+        return incomes;
+    }
+
+    public void setIncomes(List<Income> incomes) {
+        this.incomes = incomes;
+    }
+
+    public List<IncomePlan> getIncomePlans() {
+        return incomePlans;
+    }
+
+    public void setIncomePlans(List<IncomePlan> incomePlans) {
+        this.incomePlans = incomePlans;
+    }
+
+    public List<CostPlan> getCostPlans() {
+        return costPlans;
+    }
+
+    public void setCostPlans(List<CostPlan> costPlans) {
+        this.costPlans = costPlans;
+    }
+
+    public List<Expense> getExpenses() {
+        return expenses;
+    }
+
+    public void setExpenses(List<Expense> expenses) {
+        this.expenses = expenses;
     }
 }

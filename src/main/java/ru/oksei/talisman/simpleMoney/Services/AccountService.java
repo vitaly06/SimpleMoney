@@ -7,6 +7,7 @@ import ru.oksei.talisman.simpleMoney.Models.Account;
 import ru.oksei.talisman.simpleMoney.Repositories.AccountRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -55,7 +56,11 @@ public class AccountService {
         accountTo.setSumma(accountTo.getSumma() + amount);
         accountRepository.save(accountFrom);
         accountRepository.save(accountTo);
-
-
     }
+
+    public Optional<Account> getAccountById(int accountId) {
+        return accountRepository.findById(accountId);
+    }
+
+
 }

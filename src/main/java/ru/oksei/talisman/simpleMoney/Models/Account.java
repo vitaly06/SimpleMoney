@@ -3,6 +3,8 @@ package ru.oksei.talisman.simpleMoney.Models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "accounts")
 public class Account {
@@ -20,6 +22,12 @@ public class Account {
     @JoinColumn(name = "personid")
     @JsonIgnore
     private Person person;
+    @OneToMany(mappedBy = "account")
+    @JsonIgnore
+    private List<Income> incomes;
+    @OneToMany(mappedBy = "account")
+    @JsonIgnore
+    private List<Expense> expenses;
 
     public Account() {}
 
@@ -67,5 +75,21 @@ public class Account {
 
     public void setPerson(Person person) {
         this.person = person;
+    }
+
+    public List<Income> getIncomes() {
+        return incomes;
+    }
+
+    public void setIncomes(List<Income> incomes) {
+        this.incomes = incomes;
+    }
+
+    public List<Expense> getExpenses() {
+        return expenses;
+    }
+
+    public void setExpenses(List<Expense> expenses) {
+        this.expenses = expenses;
     }
 }

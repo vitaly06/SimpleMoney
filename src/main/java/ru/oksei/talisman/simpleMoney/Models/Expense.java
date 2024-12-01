@@ -6,12 +6,12 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "income")
-public class Income {
+@Table(name = "expenses")
+public class Expense {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "incomeid")
-    private int incomeId;
+    @Column(name = "expenseid")
+    private int expenseid;
     @Column(name = "month")
     private String month;
     @Column(name = "year")
@@ -34,23 +34,22 @@ public class Income {
     private Person person;
 
 
-    public Income() {}
+    public Expense() {}
 
-    public Income(String month, int year, Date date, int summa) {
+    public Expense(String month, int year, Date date, int summa) {
         this.month = month;
         this.year = year;
         this.date = date;
         this.summa = summa;
     }
 
-    
 
-    public int getIncomeId() {
-        return incomeId;
+    public int getExpenseid() {
+        return expenseid;
     }
 
-    public void setIncomeId(int incomeId) {
-        this.incomeId = incomeId;
+    public void setExpenseid(int expenseid) {
+        this.expenseid = expenseid;
     }
 
     public String getMonth() {

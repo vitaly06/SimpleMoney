@@ -34,6 +34,14 @@ public class Person {
     @OneToMany(mappedBy = "person")
     @JsonIgnore
     private List<Account> accounts;
+    // Доходы
+    @OneToMany(mappedBy = "person")
+    @JsonIgnore
+    private List<Income> incomes;
+
+    @OneToMany(mappedBy = "person")
+    @JsonIgnore
+    private List<Expense> expenses;
 
     public Person() {}
 
@@ -105,5 +113,21 @@ public class Person {
 
     public void setAccounts(List<Account> accounts) {
         this.accounts = accounts;
+    }
+
+    public List<Income> getIncomes() {
+        return incomes;
+    }
+
+    public void setIncomes(List<Income> incomes) {
+        this.incomes = incomes;
+    }
+
+    public List<Expense> getExpenses() {
+        return expenses;
+    }
+
+    public void setExpenses(List<Expense> expenses) {
+        this.expenses = expenses;
     }
 }
