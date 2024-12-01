@@ -1,5 +1,6 @@
 package ru.oksei.talisman.simpleMoney.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity

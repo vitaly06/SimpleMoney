@@ -17,6 +17,10 @@ public class PersonService {
         this.personRepository = personRepository;
     }
 
+    public Person getPerson(int id) {
+        return personRepository.findById(id).orElse(null);
+    }
+
     public Person login(String email, String password){
         return personRepository.findByEmailAndPassword(email, password);
     }

@@ -1,5 +1,6 @@
 package ru.oksei.talisman.simpleMoney.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -18,11 +19,14 @@ public class Category {
     // Пользователь
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "personid")
+    @JsonIgnore
     private Person person;
     // Планы доходов
+    @JsonIgnore
     @OneToMany(mappedBy = "category")
     private List<IncomePlan> incomePlans;
     // Планы расходов
+    @JsonIgnore
     @OneToMany(mappedBy = "category")
     private List<CostPlan> costPlans;
 

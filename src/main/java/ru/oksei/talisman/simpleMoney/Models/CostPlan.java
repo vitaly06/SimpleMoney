@@ -1,9 +1,10 @@
 package ru.oksei.talisman.simpleMoney.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "costPlan")
+@Table(name = "costplan")
 public class CostPlan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,9 +25,11 @@ public class CostPlan {
     // Пользователь
     @ManyToOne
     @JoinColumn(name = "personid")
+    @JsonIgnore
     private Person person;
     // Категория траты
     @ManyToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
     @JoinColumn(name = "categoryid")
     private Category category;
 

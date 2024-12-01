@@ -26,6 +26,9 @@ public class Person {
     // Планы расходов
     @OneToMany(mappedBy = "person")
     private List<CostPlan> costPlans;
+    // Счета
+    @OneToMany(mappedBy = "person")
+    private List<Account> accounts;
 
     public Person() {}
 
@@ -65,5 +68,37 @@ public class Person {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
+
+    public List<IncomePlan> getIncomePlans() {
+        return incomePlans;
+    }
+
+    public void setIncomePlans(List<IncomePlan> incomePlans) {
+        this.incomePlans = incomePlans;
+    }
+
+    public List<CostPlan> getCostPlans() {
+        return costPlans;
+    }
+
+    public void setCostPlans(List<CostPlan> costPlans) {
+        this.costPlans = costPlans;
+    }
+
+    public List<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
     }
 }

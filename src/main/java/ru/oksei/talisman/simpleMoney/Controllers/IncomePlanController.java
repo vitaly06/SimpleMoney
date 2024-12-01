@@ -2,8 +2,12 @@ package ru.oksei.talisman.simpleMoney.Controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import ru.oksei.talisman.simpleMoney.Models.Category;
 import ru.oksei.talisman.simpleMoney.Models.IncomePlan;
+import ru.oksei.talisman.simpleMoney.Models.Person;
+import ru.oksei.talisman.simpleMoney.Services.CategoryService;
 import ru.oksei.talisman.simpleMoney.Services.IncomePlanService;
+import ru.oksei.talisman.simpleMoney.Services.PersonService;
 
 import java.util.List;
 
@@ -13,9 +17,19 @@ import java.util.List;
 public class IncomePlanController {
     @Autowired
     private IncomePlanService incomePlanService;
+    @Autowired
+    private PersonService personService;
+    @Autowired
+    private CategoryService categoryService;
 
     @PostMapping("/addIncomePlan")
-    public void addIncomePlan(@ModelAttribute IncomePlan incomePlan) {
+    public void addIncomePlan(@ModelAttribute IncomePlan incomePlan,
+                              @RequestParam("personId") int personId,
+                              @RequestParam("categoryId") int categoryId) {
+        Person person = personService.getPerson(personId);
+        Category category = categoryService.getCategoryById(categoryId);
+        incomePlan.setPerson(person);
+        incomePlan.setCategory(category);
         incomePlanService.saveIncomePlan(incomePlan);
     }
 

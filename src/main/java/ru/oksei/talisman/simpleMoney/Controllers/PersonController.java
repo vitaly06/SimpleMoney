@@ -44,4 +44,9 @@ public class PersonController {
         }
         return ResponseEntity.ok().body("Пользователь зарегистрирован");
     }
+
+    @GetMapping("/all")
+    public List<Person> getAll() {
+        return personService.getAllPersons();
+    }
 }
