@@ -25,7 +25,7 @@ public class AccountController {
 
     @PostMapping("/addAccount")
     public void addAccount(@ModelAttribute Account account,
-                              @RequestParam("personId") int personId) {
+                           @RequestParam("personId") int personId) {
         Person person = personService.getPerson(personId);
         account.setPerson(person);
         accountService.addAccount(account);
@@ -40,5 +40,12 @@ public class AccountController {
     @PostMapping("/deleteAccount")
     public void deleteAccount(@RequestParam("accountId") int accountId) {
         accountService.deleteAccount(accountId);
+    }
+
+    @PostMapping("/transfer")
+    public void transferMoney(@RequestParam("fromId") int fromId,
+                              @RequestParam("toId") int toId,
+                              @RequestParam("amount") int amount) {
+        accountService.transferMoney(fromId, toId, amount);
     }
 }

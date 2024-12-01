@@ -44,4 +44,18 @@ public class AccountService {
     public void deleteAccount(int accountId) {
         accountRepository.deleteById(accountId);
     }
+
+    @Transactional
+    public void transferMoney(int fromId, int toId, int amount) {
+        Account accountFrom = accountRepository.findById(fromId)
+                .orElseThrow(() -> new IllegalArgumentException("Счёт не найден"));
+        Account accountTo = accountRepository.findById(toId)
+                .orElseThrow(() -> new IllegalArgumentException("Счёт не найден"));
+        accountFrom.setSumma(accountFrom.getSumma() - amount);
+        accountTo.setSumma(accountTo.getSumma() + amount);
+        accountRepository.save(accountFrom);
+        accountRepository.save(accountTo);
+
+
+    }
 }
